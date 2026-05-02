@@ -1,0 +1,11 @@
+docker run -d \
+  --name patient-service-db \
+  -e POSTGRES_USER=postgres \
+  -e POSTGRES_PASSWORD=password \
+  -e POSTGRES_DB=postgres \
+  -p 5432:5432 \
+  -v postgres_data:/var/lib/postgresql/data \
+  postgres:16
+
+
+  docker run -d --name patient-service-db -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=password -e POSTGRES_DB=postgres -p 5432:5432 -v postgres_data:/var/lib/postgresql/data postgres:17-alpine
