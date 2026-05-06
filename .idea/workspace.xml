@@ -5,14 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e72345bd-5b9e-4b0a-b1a2-d4182011553b" name="Changes" comment="solve IDE conflict">
-      <change afterPath="$PROJECT_DIR$/billing-service/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/patient-service/src/main/java/com/pm/patientservice/grpc/BillingGrpcServiceClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/billing-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/billing-service/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +17,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Dockerfile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -41,13 +36,13 @@
     &quot;accountId&quot;: &quot;527001b0-7f72-4f38-9ede-1deac7aa28d9&quot;
   }
 }</component>
-  <component name="HttpClientOnboardingState"><![CDATA[{
-  "isOnboardingCommentShown": true
-}]]></component>
-  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
-  <component name="KubernetesApiProvider"><![CDATA[{
-  "isMigrated": true
-}]]></component>
+  <component name="HttpClientOnboardingState">{
+  &quot;isOnboardingCommentShown&quot;: true
+}</component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -69,7 +64,9 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Docker.billing-service.executor": "Run",
     "Docker.billing-service/Dockerfile.executor": "Run",
+    "Docker.patient-service.executor": "Run",
     "Maven.billing-service [clean].executor": "Run",
     "Maven.billing-service [compile].executor": "Run",
     "Maven.patient-service [clean].executor": "Run",
@@ -87,7 +84,7 @@
     "Spring Boot.BillingServiceApplication.executor": "Run",
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "billing-service",
+    "git-widget-placeholder": "patient-service",
     "ignore.virus.scanning.warn.message": "true",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
@@ -101,7 +98,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Docker.billing-service">
+  <component name="RunManager" selected="Docker.patient-service">
     <configuration name="PatientServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.pm.patientservice.PatientServiceApplication" />
       <module name="patient-service" />
@@ -131,7 +128,9 @@
       </method>
     </configuration>
     <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
-      <deployment type="dockerfile" />
+      <deployment type="dockerfile">
+        <settings />
+      </deployment>
       <method v="2" />
     </configuration>
     <configuration name="billing-service" type="docker-deploy" factoryName="docker-image" server-name="Docker">
@@ -199,6 +198,14 @@
                 <option name="name" value="spring.sql.init.mode" />
                 <option name="value" value="always" />
               </DockerEnvVarImpl>
+              <DockerEnvVarImpl>
+                <option name="name" value="grpc.billing-service.host" />
+                <option name="value" value="billing-service" />
+              </DockerEnvVarImpl>
+              <DockerEnvVarImpl>
+                <option name="name" value="grpc.billing-service.port" />
+                <option name="value" value="9001" />
+              </DockerEnvVarImpl>
             </list>
           </option>
           <option name="portBindings">
@@ -209,7 +216,7 @@
               </DockerPortBindingImpl>
             </list>
           </option>
-          <option name="commandLineOptions" value="--network patient-network" />
+          <option name="commandLineOptions" value="--network patient-network --network system-network" />
           <option name="showCommandPreview" value="true" />
           <option name="sourceFilePath" value="patient-service/Dockerfile" />
         </settings>
