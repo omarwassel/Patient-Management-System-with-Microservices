@@ -1,0 +1,9 @@
+###
+GRPC localhost:9001/BillingService/CreateBillingAccount
+
+{
+  "patientId": "1511",
+  "name": "test",
+  "email": "test@example.com"
+}
+###

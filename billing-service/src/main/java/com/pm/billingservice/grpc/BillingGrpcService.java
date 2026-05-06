@@ -4,7 +4,7 @@ import billing.BillingRequest;
 import billing.BillingResponse;
 import billing.BillingServiceGrpc.BillingServiceImplBase;
 import io.grpc.stub.StreamObserver;
-import org.springframework.grpc.server.service.GrpcService;
+import net.devh.boot.grpc.server.service.GrpcService;
 
 @GrpcService
 public class BillingGrpcService extends BillingServiceImplBase {

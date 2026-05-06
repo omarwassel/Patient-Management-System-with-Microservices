@@ -27,9 +27,11 @@ public class BillingGrpcServiceClient {
                 .usePlaintext() // Use only for development; use SSL/TLS for production
                 .build();
 
-        log.info("Connecting to Billing Service GRPC at {}{}", host, port);
+        log.info("Connecting to Billing Service GRPC at {}:{} ...", host, port);
         // 3. Create the blocking stub
         this.blockingStub = BillingServiceGrpc.newBlockingStub(channel);
+
+        log.info("Connected to Billing Service GRPC at {}:{}", host, port);
     }
 
     public BillingResponse creatBillingAccount(String name, String email, String patientId) {
@@ -38,7 +40,12 @@ public class BillingGrpcServiceClient {
                 .setEmail(email)
                 .setPatientId(patientId)
                 .build();
-        return blockingStub.createBillingAccount(billingRequest);
+
+
+        BillingResponse response = blockingStub.createBillingAccount(billingRequest);
+
+        log.info("create billing account response: {}", response);
+        return response;
     }
 
     // 4. Proper cleanup when the Spring context closes

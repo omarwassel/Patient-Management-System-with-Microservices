@@ -4,9 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e72345bd-5b9e-4b0a-b1a2-d4182011553b" name="Changes" comment="solve IDE conflict">
-      <change afterPath="$PROJECT_DIR$/patient-service/src/main/java/com/pm/patientservice/grpc/BillingGrpcServiceClient.java" afterDir="false" />
+    <list default="true" id="e72345bd-5b9e-4b0a-b1a2-d4182011553b" name="Changes" comment="adding Billing Grpc client to patient service">
+      <change afterPath="$PROJECT_DIR$/httpRequests/patient-service/create-billing-account.http" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/httpRequests/patient-service/create-patient.http" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/httpRequests/patient-service/delete-patient.http" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/httpRequests/patient-service/get-patients.http" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/httpRequests/patient-service/update-patient.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/billing-service/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/billing-service/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/billing-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/billing-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/billing-service/src/main/java/com/pm/billingservice/grpc/BillingGrpcService.java" beforeDir="false" afterPath="$PROJECT_DIR$/billing-service/src/main/java/com/pm/billingservice/grpc/BillingGrpcService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/billing-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/billing-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/patient-service/src/main/java/com/pm/patientservice/grpc/BillingGrpcServiceClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/patient-service/src/main/java/com/pm/patientservice/grpc/BillingGrpcServiceClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/patient-service/src/main/java/com/pm/patientservice/service/PatientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/patient-service/src/main/java/com/pm/patientservice/service/PatientService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +29,7 @@
       <list>
         <option value="Dockerfile" />
         <option value="Class" />
+        <option value="HTTP Request" />
       </list>
     </option>
   </component>
@@ -67,8 +79,12 @@
     "Docker.billing-service.executor": "Run",
     "Docker.billing-service/Dockerfile.executor": "Run",
     "Docker.patient-service.executor": "Run",
+    "HTTP Request.create-billing-account | #1.executor": "Run",
+    "HTTP Request.create-patient | Creates a new patient entity.executor": "Run",
     "Maven.billing-service [clean].executor": "Run",
     "Maven.billing-service [compile].executor": "Run",
+    "Maven.billing-service [package].executor": "Run",
+    "Maven.billing-service [test].executor": "Run",
     "Maven.patient-service [clean].executor": "Run",
     "Maven.patient-service [compile].executor": "Run",
     "Maven.patient-service [package].executor": "Run",
@@ -94,11 +110,27 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
     "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Docker.patient-service">
+  <component name="RunDashboard">
+    <option name="configurationStatuses">
+      <map>
+        <entry key="HttpClient.HttpRequestRunConfigurationType">
+          <value>
+            <map>
+              <entry key="create-billing-account | #1" value="STOPPED" />
+            </map>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="RunManager" selected="Docker.billing-service">
     <configuration name="PatientServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.pm.patientservice.PatientServiceApplication" />
       <module name="patient-service" />
@@ -111,6 +143,12 @@
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
+    </configuration>
+    <configuration name="create-billing-account | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/httpRequests/patient-service/create-billing-account.http" executionIdentifier="#1" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="create-patient | Creates a new patient entity" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/httpRequests/patient-service/create-patient.http" executionIdentifier="Creates a new patient entity" runType="Run single request">
+      <method v="2" />
     </configuration>
     <configuration name="BillingServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="billing-service" />
@@ -150,18 +188,49 @@
               </DockerPortBindingImpl>
             </list>
           </option>
-          <option name="commandLineOptions" value="--network system-network" />
+          <option name="commandLineOptions" value="--network patient-network" />
         </settings>
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="patient-service" type="docker-deploy" factoryName="dockerfile" singleton="false" temporary="true" server-name="Docker">
+    <configuration name="billing-service" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="imageTag" value="billing-service:latest" />
+          <option name="containerName" value="billing-service" />
+          <option name="portBindings">
+            <list>
+              <DockerPortBindingImpl>
+                <option name="containerPort" value="4001" />
+                <option name="hostPort" value="4001" />
+              </DockerPortBindingImpl>
+              <DockerPortBindingImpl>
+                <option name="containerPort" value="9001" />
+                <option name="hostPort" value="9001" />
+              </DockerPortBindingImpl>
+            </list>
+          </option>
+          <option name="commandLineOptions" value="--network patient-network" />
+          <option name="sourceFilePath" value="billing-service/Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="patient-service" type="docker-deploy" factoryName="dockerfile" singleton="false" server-name="Docker">
       <deployment type="dockerfile">
         <settings>
           <option name="imageTag" value="patient-service:latest" />
           <option name="containerName" value="patient-service" />
           <option name="envVars">
             <list>
+              <DockerEnvVarImpl>
+                <option name="name" value="grpc.billing-service.host" />
+                <option name="value" value="billing-service" />
+              </DockerEnvVarImpl>
+              <DockerEnvVarImpl>
+                <option name="name" value="grpc.billing-service.port" />
+                <option name="value" value="9001" />
+              </DockerEnvVarImpl>
               <DockerEnvVarImpl>
                 <option name="name" value="spring.datasource.driver-class-name" />
                 <option name="value" value="org.postgresql.Driver" />
@@ -198,14 +267,6 @@
                 <option name="name" value="spring.sql.init.mode" />
                 <option name="value" value="always" />
               </DockerEnvVarImpl>
-              <DockerEnvVarImpl>
-                <option name="name" value="grpc.billing-service.host" />
-                <option name="value" value="billing-service" />
-              </DockerEnvVarImpl>
-              <DockerEnvVarImpl>
-                <option name="name" value="grpc.billing-service.port" />
-                <option name="value" value="9001" />
-              </DockerEnvVarImpl>
             </list>
           </option>
           <option name="portBindings">
@@ -216,7 +277,7 @@
               </DockerPortBindingImpl>
             </list>
           </option>
-          <option name="commandLineOptions" value="--network patient-network --network system-network" />
+          <option name="commandLineOptions" value="--network patient-network" />
           <option name="showCommandPreview" value="true" />
           <option name="sourceFilePath" value="patient-service/Dockerfile" />
         </settings>
@@ -227,12 +288,15 @@
       <item itemvalue="Application.PatientServiceApplication" />
       <item itemvalue="Docker.billing-service" />
       <item itemvalue="Docker.patient-service" />
+      <item itemvalue="HTTP Request.create-patient | Creates a new patient entity" />
+      <item itemvalue="HTTP Request.create-billing-account | #1" />
       <item itemvalue="Spring Boot.BillingServiceApplication" />
       <item itemvalue="Spring Boot.PatientServiceApplication" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Docker.patient-service" />
+        <item itemvalue="HTTP Request.create-patient | Creates a new patient entity" />
+        <item itemvalue="HTTP Request.create-billing-account | #1" />
         <item itemvalue="Application.PatientServiceApplication" />
       </list>
     </recent_temporary>
@@ -248,7 +312,18 @@
       <workItem from="1778030816651" duration="57000" />
       <workItem from="1778030886821" duration="17000" />
       <workItem from="1778031174875" duration="2385000" />
+      <workItem from="1778038685454" duration="5241000" />
+      <workItem from="1778046217118" duration="3359000" />
     </task>
+    <task id="LOCAL؜-٠٠٠٠١" summary="adding Billing Grpc client to patient service">
+      <option name="closed" value="true" />
+      <created>1778038554229</created>
+      <option name="number" value="٠٠٠٠١" />
+      <option name="presentableId" value="LOCAL؜-٠٠٠٠١" />
+      <option name="project" value="LOCAL؜" />
+      <updated>1778038554229</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -267,7 +342,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="solve IDE conflict" />
-    <option name="LAST_COMMIT_MESSAGE" value="solve IDE conflict" />
+    <MESSAGE value="adding Billing Grpc client to patient service" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding Billing Grpc client to patient service" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
