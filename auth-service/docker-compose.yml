@@ -1,0 +1,40 @@
+services:
+  auth-service-db:
+    image: postgres:17-alpine
+    container_name: auth-service-db
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    ports:
+      - "4006:5432"
+    volumes:
+      # Using your existing named volume
+      - auth-volume:/var/lib/postgresql/data
+    networks:
+      - patient-network
+
+  auth-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: auth-service
+    ports:
+      - "4005:4000"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://auth-service-db:5432/${DB_NAME}
+      - SPRING_DATASOURCE_USERNAME=${DB_USER}
+      - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    depends_on:
+      - auth-service-db
+    networks:
+      - patient-network
+
+volumes:
+  auth-volume:
+    external: true
+
+networks:
+  patient-network:
+    external: true
